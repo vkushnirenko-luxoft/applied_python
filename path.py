@@ -1,16 +1,17 @@
 # !/usr/bin/python
 import os
 path='/tmp/1'
-_listdir=[]
-for root in os.walk(path):
-    _listdir.append(root)
-print (_listdir)
+def _tree(path):
+    f=open('/tmp/tree.txt','w+')
+    for root, dirs, files in os.walk(path):
+        print (root)
+        f.write(os.path.join(root,"\n"))
+        for dir in dirs:
+            print (dir)
+            f.write(os.path.join(dir,"\n"))
+            for name in files:
+                print (name)
+                f.write("%s\n" %name)
+    f.close()
 
-print ("")
-for root in iter(_listdir):
-    print root
-
-print ("")
-for root, dirs, files in os.walk(path):
-    for name in files:
-        print os.path.join(root, name)
+_tree(path)
